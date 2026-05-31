@@ -1,3 +1,13 @@
+# Godot
+**/.godot/
+
+# Local editor plugins
+**/addons/godot_ai/
+
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
