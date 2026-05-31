@@ -1,0 +1,90 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxg2q"]
+albedo_color = Color(1, 0.35, 0.18, 1)
+roughness = 0.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_glv2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu6xs"]
+albedo_color = Color(0.18, 0.52, 1, 1)
+roughness = 0.55
+
+[sub_resource type="SphereMesh" id="SphereMesh_r0du0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm0pq"]
+albedo_color = Color(0.2, 0.82, 0.45, 1)
+roughness = 0.55
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fos0i"]
+height = 1.8
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3dxm6"]
+sky_top_color = Color(0.14, 0.22, 0.36, 1)
+sky_horizon_color = Color(0.56, 0.68, 0.82, 1)
+ground_bottom_color = Color(0.09, 0.1, 0.12, 1)
+ground_horizon_color = Color(0.25, 0.28, 0.3, 1)
+
+[sub_resource type="Sky" id="Sky_lgr22"]
+sky_material = SubResource("ProceduralSkyMaterial_3dxm6")
+
+[sub_resource type="Environment" id="Environment_trn2v"]
+background_mode = 2
+sky = SubResource("Sky_lgr22")
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.6, 0.68, 1)
+ambient_light_energy = 0.45
+
+[sub_resource type="Animation" id="Animation_03owx"]
+resource_name = "spin_box"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 360, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wkp8b"]
+_data = {
+&"spin_box": SubResource("Animation_03owx")
+}
+
+[node name="Main" type="Node3D" unique_id=986593596]
+
+[node name="Box" type="MeshInstance3D" parent="." unique_id=1965082494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+material_override = SubResource("StandardMaterial3D_rxg2q")
+mesh = SubResource("BoxMesh_glv2v")
+
+[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1800059183]
+material_override = SubResource("StandardMaterial3D_uu6xs")
+mesh = SubResource("SphereMesh_r0du0")
+
+[node name="Cylinder" type="MeshInstance3D" parent="." unique_id=1645336845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 0)
+material_override = SubResource("StandardMaterial3D_cm0pq")
+mesh = SubResource("CylinderMesh_fos0i")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1804740557]
+transform = Transform3D(1, 0, 0, 0, 0.92718387, 0.37460658, 0, -0.37460658, 0.92718387, 0, 2.6, 6.5)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=419170363]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+light_color = Color(1, 0.94, 0.82, 1)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1191540118]
+environment = SubResource("Environment_trn2v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1474099548]
+libraries/ = SubResource("AnimationLibrary_wkp8b")
+autoplay = &"spin_box"
