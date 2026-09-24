@@ -1,8 +1,19 @@
-# Godot
+# Godot generated data
 **/.godot/
+**/*.import
 
 # Local editor plugins
 **/addons/godot_ai/
+
+# Exported builds
+**/export/
+**/Export/
+*.exe
+*.console.exe
+*.pck
+
+# Local export credentials
+**/export_credentials.cfg
 
 # OS
 .DS_Store
@@ -11,3 +22,4 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.bak
+
